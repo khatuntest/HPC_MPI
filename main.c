@@ -4,18 +4,26 @@
 #include <string.h>
 #define MAX_LEN 1024
 
-
 void caesar_cipher(char *str, int len, int mode) {
     for (int i = 0; i < len; i++) {
         if (str[i] >= 32 && str[i] <= 126) {  // Printable ASCII range
             if (mode == 1) {  // Encryption
-                str[i] = ((str[i] - 32 + 3) % 95) + 32;
-            } else if (mode == 2) {  // Decryption
-                str[i] = ((str[i] - 32 - 3 + 95) % 95) + 32;
+                if(str[i] >= 'a' && str[i] <= 'z'){
+                    str[i] = ((str[i] - 'a' + 3) % 26) +'a';
+                }
+                else if (str[i] >= 'A' && str[i] <= 'Z')
+                    str[i] = ((str[i] - 'A' + 3) % 26) +'A';
+            }
+            else if (mode == 2) {  // Decryption
+                if(str[i] >= 'a' && str[i] <= 'z')
+                    str[i] = ((str[i] -'a'- 3 + 26) % 26) + 'a';
+                else if(str[i] >= 'A' && str[i] <= 'Z')
+                    str[i] = ((str[i] -'A'- 3 + 26) % 26) + 'A';
             }
         }
     }
 }
+
 
 
 int main(int argc , char ** argv) {
